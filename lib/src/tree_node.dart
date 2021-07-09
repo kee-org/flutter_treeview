@@ -134,7 +134,7 @@ class _TreeNodeState<T> extends State<TreeNode<T>>
             onTap: () => _handleExpand(),
             child: _TreeNodeExpander(
               speed: _controller.duration!,
-              expanded: widget.node.expanded,
+              expanded: _isExpanded,
               themeData: _theme.expanderTheme,
             ),
           )
