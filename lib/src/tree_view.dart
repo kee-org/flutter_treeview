@@ -25,15 +25,15 @@ import 'models/node.dart';
 ///   theme: treeViewTheme
 /// ),
 /// ```
-class TreeView extends InheritedWidget {
+class TreeView<T> extends InheritedWidget {
   /// The controller for the [TreeView]. It manages the data and selected key.
-  final TreeViewController controller;
+  final TreeViewController<T> controller;
 
   /// The tap handler for a node. Passes the node key.
   final Function(String)? onNodeTap;
 
   /// Custom builder for nodes. Parameters are the build context and tree node.
-  final Widget Function(BuildContext, Node)? nodeBuilder;
+  final Widget Function(BuildContext, Node<T>)? nodeBuilder;
 
   /// The double tap handler for a node. Passes the node key.
   final Function(String)? onNodeDoubleTap;
@@ -92,7 +92,7 @@ class TreeView extends InheritedWidget {
   })  : this.theme = theme ?? const TreeViewTheme(),
         super(
           key: key,
-          child: _TreeViewData(
+          child: _TreeViewData<T>(
             controller,
             shrinkWrap: shrinkWrap,
             primary: primary,
@@ -100,7 +100,7 @@ class TreeView extends InheritedWidget {
           ),
         );
 
-  static TreeView? of(BuildContext context) =>
+  static TreeView<T>? of<T>(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType(aspect: TreeView);
 
   @override
@@ -114,8 +114,8 @@ class TreeView extends InheritedWidget {
   }
 }
 
-class _TreeViewData extends StatelessWidget {
-  final TreeViewController _controller;
+class _TreeViewData<T> extends StatelessWidget {
+  final TreeViewController<T> _controller;
   final bool? shrinkWrap;
   final bool? primary;
   final ScrollPhysics? physics;
@@ -133,8 +133,8 @@ class _TreeViewData extends StatelessWidget {
         primary: primary,
         physics: physics,
         padding: EdgeInsets.zero,
-        children: _controller.children.map((Node node) {
-          return TreeNode(node: node);
+        children: _controller.children.map<TreeNode<T>>((Node<T> node) {
+          return TreeNode<T>(node: node);
         }).toList(),
       ),
     );

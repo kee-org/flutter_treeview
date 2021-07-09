@@ -33,7 +33,7 @@ class Node<T> {
   final T? data;
 
   /// The sub [Node]s of this object.
-  final List<Node> children;
+  final List<Node<T>> children;
 
   /// Force the node to be a parent so that node can show expander without
   /// having children node.
@@ -52,7 +52,7 @@ class Node<T> {
   /// Creates a [Node] from a string value. It generates a unique key.
   factory Node.fromLabel(String label) {
     String _key = Utilities.generateRandom();
-    return Node(
+    return Node<T>(
       key: '${_key}_$label',
       label: label,
     );
@@ -68,7 +68,7 @@ class Node<T> {
     String? _key = map['key'];
     String _label = map['label'];
     var _data = map['data'];
-    List<Node> _children = [];
+    List<Node<T>> _children = [];
     if (_key == null) {
       _key = Utilities.generateRandom();
     }
@@ -86,10 +86,10 @@ class Node<T> {
     if (map['children'] != null) {
       List<Map<String, dynamic>> _childrenMap = List.from(map['children']);
       _children = _childrenMap
-          .map((Map<String, dynamic> child) => Node.fromMap(child))
+          .map((Map<String, dynamic> child) => Node<T>.fromMap(child))
           .toList();
     }
-    return Node(
+    return Node<T>(
       key: '$_key',
       label: _label,
       data: _data,
@@ -101,16 +101,16 @@ class Node<T> {
 
   /// Creates a copy of this object but with the given fields
   /// replaced with the new values.
-  Node copyWith({
+  Node<T> copyWith({
     String? key,
     String? label,
-    List<Node>? children,
+    List<Node<T>>? children,
     bool? expanded,
     bool? parent,
     IconData? icon,
     T? data,
   }) =>
-      Node(
+      Node<T>(
         key: key ?? this.key,
         label: label ?? this.label,
         icon: icon ?? this.icon,
@@ -167,7 +167,7 @@ class Node<T> {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other.runtimeType != runtimeType) return false;
-    return other is Node &&
+    return other is Node<T> &&
         other.key == key &&
         other.label == label &&
         other.icon == icon &&
