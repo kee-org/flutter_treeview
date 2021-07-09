@@ -38,6 +38,9 @@ class TreeView<T> extends InheritedWidget {
   /// The double tap handler for a node. Passes the node key.
   final Function(String)? onNodeDoubleTap;
 
+  /// The long press handler for a node. Passes the node key.
+  final Function(String)? onNodeLongPress;
+
   /// The expand/collapse handler for a node. Passes the node key and the
   /// expansion state.
   final Function(String, bool)? onExpansionChanged;
@@ -81,6 +84,7 @@ class TreeView<T> extends InheritedWidget {
     required this.controller,
     this.onNodeTap,
     this.onNodeDoubleTap,
+    this.onNodeLongPress,
     this.physics,
     this.onExpansionChanged,
     this.allowParentSelect: false,
@@ -107,6 +111,7 @@ class TreeView<T> extends InheritedWidget {
   bool updateShouldNotify(TreeView oldWidget) {
     return oldWidget.controller.children != this.controller.children ||
         oldWidget.onNodeTap != this.onNodeTap ||
+        oldWidget.onNodeLongPress != this.onNodeLongPress ||
         oldWidget.onExpansionChanged != this.onExpansionChanged ||
         oldWidget.theme != this.theme ||
         oldWidget.supportParentDoubleTap != this.supportParentDoubleTap ||

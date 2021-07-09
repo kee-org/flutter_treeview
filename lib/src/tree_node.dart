@@ -109,6 +109,14 @@ class _TreeNodeState<T> extends State<TreeNode<T>>
     }
   }
 
+  void _handleLongPress() {
+    TreeView<T>? _treeView = TreeView.of<T>(context);
+    assert(_treeView != null, 'TreeView must exist in context');
+    if (_treeView!.onNodeLongPress != null) {
+      _treeView.onNodeLongPress!(widget.node.key);
+    }
+  }
+
   void _handleDoubleTap() {
     TreeView<T>? _treeView = TreeView.of<T>(context);
     assert(_treeView != null, 'TreeView must exist in context');
@@ -213,17 +221,20 @@ class _TreeNodeState<T> extends State<TreeNode<T>>
     Widget _tappable = _treeView.onNodeDoubleTap != null
         ? InkWell(
             onTap: _handleTap,
+            onLongPress: _handleLongPress,
             onDoubleTap: _handleDoubleTap,
             child: labelContainer,
           )
         : InkWell(
             onTap: _handleTap,
+            onLongPress: _handleLongPress,
             child: labelContainer,
           );
     if (widget.node.isParent) {
       if (_treeView.supportParentDoubleTap && canSelectParent) {
         _tappable = InkWell(
           onTap: canSelectParent ? _handleTap : _handleExpand,
+          onLongPress: _handleLongPress,
           onDoubleTap: () {
             _handleExpand();
             _handleDoubleTap();
@@ -233,12 +244,14 @@ class _TreeNodeState<T> extends State<TreeNode<T>>
       } else if (_treeView.supportParentDoubleTap) {
         _tappable = InkWell(
           onTap: _handleExpand,
+          onLongPress: _handleLongPress,
           onDoubleTap: _handleDoubleTap,
           child: labelContainer,
         );
       } else {
         _tappable = InkWell(
           onTap: canSelectParent ? _handleTap : _handleExpand,
+          onLongPress: _handleLongPress,
           child: labelContainer,
         );
       }
