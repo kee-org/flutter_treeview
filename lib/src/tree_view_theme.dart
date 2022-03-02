@@ -132,7 +132,6 @@ class TreeViewTheme {
   /// replaced by the non-null parameters of the given icon theme. If the given
   /// [TreeViewTheme] is null, simply returns this theme.
   TreeViewTheme merge(TreeViewTheme other) {
-    if (other == null) return this;
     return copyWith(
         colorScheme: other.colorScheme,
         levelPadding: other.levelPadding,
