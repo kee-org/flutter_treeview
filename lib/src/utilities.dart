@@ -9,7 +9,7 @@ class Utilities {
   static const Color WHITE = Color.fromARGB(255, 255, 255, 255);
 
   static String toRGBA(Color color) {
-    return 'rgba(${color.red},${color.green},${color.blue},${color.alpha / 255})';
+    return 'rgba(${color.r},${color.g},${color.b},${color.a / 255})';
   }
 
   static Color textColor(Color color) {

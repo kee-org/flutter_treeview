@@ -38,7 +38,7 @@ class TreeViewController<T> {
   final String? selectedKey;
 
   TreeViewController({
-    this.children: const [],
+    this.children = const [],
     this.selectedKey,
   });
 
@@ -60,7 +60,7 @@ class TreeViewController<T> {
   ///   controller = controller.loadJSON(json: jsonString);
   /// });
   /// ```
-  TreeViewController loadJSON({String json: '[]'}) {
+  TreeViewController loadJSON({String json = '[]'}) {
     List jsonList = jsonDecode(json);
     List<Map<String, dynamic>> list = List<Map<String, dynamic>>.from(jsonList);
     return loadMap(list: list);
@@ -74,7 +74,7 @@ class TreeViewController<T> {
   ///   controller = controller.loadMap(map: dataMap);
   /// });
   /// ```
-  TreeViewController loadMap({List<Map<String, dynamic>> list: const []}) {
+  TreeViewController loadMap({List<Map<String, dynamic>> list = const []}) {
     List<Node<T>> treeData =
         list.map((Map<String, dynamic> item) => Node<T>.fromMap(item)).toList();
     return TreeViewController(
@@ -100,7 +100,7 @@ class TreeViewController<T> {
     Node<T> newNode, {
     Node<T>? parent,
     int? index,
-    InsertMode mode: InsertMode.append,
+    InsertMode mode = InsertMode.append,
   }) {
     List<Node<T>> _data =
         addNode(key, newNode, parent: parent, mode: mode, index: index);
@@ -394,7 +394,7 @@ class TreeViewController<T> {
     Node<T> newNode, {
     Node<T>? parent,
     int? index,
-    InsertMode mode: InsertMode.append,
+    InsertMode mode = InsertMode.append,
   }) {
     List<Node<T>> _children = parent == null ? this.children : parent.children;
     return _children.map((Node<T> child) {
