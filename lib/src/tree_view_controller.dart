@@ -95,7 +95,7 @@ class TreeViewController<T> {
   ///   controller = controller.withAddNode(key, newNode);
   /// });
   /// ```
-  TreeViewController withAddNode(
+  TreeViewController<T> withAddNode(
     String key,
     Node<T> newNode, {
     Node<T>? parent,
@@ -163,7 +163,7 @@ class TreeViewController<T> {
   ///   controller = controller.withToggleNode(key, newNode);
   /// });
   /// ```
-  TreeViewController withToggleNode(String key, {Node<T>? parent}) {
+  TreeViewController<T> withToggleNode(String key, {Node<T>? parent}) {
     List<Node<T>> _data = toggleNode(key, parent: parent);
     return TreeViewController(
       children: _data,
@@ -183,7 +183,7 @@ class TreeViewController<T> {
   ///   controller = controller.withExpandToNode(key, newNode);
   /// });
   /// ```
-  TreeViewController withExpandToNode(String key) {
+  TreeViewController<T> withExpandToNode(String key) {
     List<Node<T>> _data = expandToNode(key);
     return TreeViewController(
       children: _data,
@@ -203,7 +203,7 @@ class TreeViewController<T> {
   ///   controller = controller.withCollapseToNode(key, newNode);
   /// });
   /// ```
-  TreeViewController withCollapseToNode(String key) {
+  TreeViewController<T> withCollapseToNode(String key) {
     List<Node<T>> _data = collapseToNode(key);
     return TreeViewController(
       children: _data,
@@ -223,7 +223,7 @@ class TreeViewController<T> {
   ///   controller = controller.withExpandAll();
   /// });
   /// ```
-  TreeViewController withExpandAll({Node<T>? parent}) {
+  TreeViewController<T> withExpandAll({Node<T>? parent}) {
     List<Node<T>> _data = expandAll(parent: parent);
     return TreeViewController(
       children: _data,
@@ -243,7 +243,7 @@ class TreeViewController<T> {
   ///   controller = controller.withCollapseAll();
   /// });
   /// ```
-  TreeViewController withCollapseAll({Node<T>? parent}) {
+  TreeViewController<T> withCollapseAll({Node<T>? parent}) {
     List<Node<T>> _data = collapseAll(parent: parent);
     return TreeViewController(
       children: _data,
