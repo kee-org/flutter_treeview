@@ -1,3 +1,6 @@
+## [2.0.0]
+* Support Flutter 3.47
+
 ## [1.0.3+2]
 * Removed unnecessary asserts
 * Removed null safety check on TreeView scroll physics property
